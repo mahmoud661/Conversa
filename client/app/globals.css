@@ -85,7 +85,7 @@ body {
 
     .chat_space{
       flex: 8;
-      max-height:70vh;
+      max-height:68vh;
       overflow-y: scroll;
       background-color: #0e2525;
       padding: 20px;
@@ -167,8 +167,29 @@ body {
   border-bottom-right-radius: 10px;
   background-color: #122e2e;
 }
-
-
+.emoji{
+  position: relative;
+  transition: all 0.5s;
+}
+.emoji_btn{
+transition: all 0.5s;
+}
+.emoji_btn:active{
+  scale: 0.8;
+}
+.emoji_div{
+  position: absolute;
+  top: -370px;
+  margin-left: 20px;
+  transition: all 0.5s;
+}
+.show{
+  visibility: visible;
+}
+.hidden{
+  visibility: hidden;
+}
+ 
 @media (max-width: 767px) {
 
 body{

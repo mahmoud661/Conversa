@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "emoji-picker-react": "^4.5.2",
     "next": "13.4.19",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
