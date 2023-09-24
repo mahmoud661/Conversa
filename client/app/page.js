@@ -4,8 +4,15 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import man from "./media/man.png";
 import Smile from "./media/Smile.png";
-import EmojiPicker from "emoji-picker-react";
 import Friend from "./components/friend";
+import dynamic from "next/dynamic";
+
+const EmojiPicker = dynamic(
+  () => {
+    return import("emoji-picker-react");
+  },
+  { ssr: false }
+);
 
 export default function Home() {
 
@@ -20,8 +27,24 @@ export default function Home() {
 
   const emoji_ref = useRef(null);
 
+
+ const [chating, setchating] = useState([
+   {
+     message: "",
+     class: "",
+   },
+ ]);
+
+
+  const addmessage = (message) =>{
+
+setchating((prech) => [...prech, message]);
+settextValue("")
+  }
+
+
   function emojiBtnHandelr() {
-    setemojiVisibale(!emojiVisibale);
+  setemojiVisibale(!emojiVisibale);
   }
 
   function addemoji(e) {
@@ -86,26 +109,16 @@ export default function Home() {
           </div>
 
           <div className="chat_space">
-            <p className="friend_message">friend</p>
-            <p className="user_message">user</p>
-            <p className="user_message">user</p>
-            <p className="friend_message">friend</p>
-            <p className="user_message">usdsfkndflsdner</p>
-            <p className="friend_message">frkdsnfsiend</p>
-            <p className="user_message">user</p>
-            <p className="friend_message">friend</p>
-            <p className="friend_message">frieksfnkdsfnd</p>
-            <p className="friend_message">friend</p>
+            {chating.map((message, index) => (
+              <p className={message.class}>{message.message}</p>
+            ))}
           </div>
           <div className="chat_typing">
-            <div className="emoji">
+            <div className="emoji" ref={emoji_ref}>
               <button className="emoji_btn" onClick={emojiBtnHandelr}>
                 <img width={32} height={32} src={Smile.src} />
               </button>
-              <div
-                className={`emoji_div ${emojiVisibale ? "show" : "hidden"}`}
-                ref={emoji_ref}
-              >
+              <div className={`emoji_div ${emojiVisibale ? "show" : "hidden"}`}>
                 <EmojiPicker
                   width={250}
                   height={350}
@@ -120,7 +133,17 @@ export default function Home() {
               onChange={handelTextChange}
               value={textValue}
             />
-            <button className="go_btn">{"->"}</button>
+            <button
+              className="go_btn"
+              onClick={() =>
+                addmessage({
+                  message: textValue,
+                  class: "user_message",
+                })
+              }
+            >
+              {"->"}
+            </button>
           </div>
         </div>
       </div>
