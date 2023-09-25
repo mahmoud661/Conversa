@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import man from "./media/man.png";
+import man from "./media/1.png";
 import Smile from "./media/Smile.png";
 import Friend from "./components/friend";
 import dynamic from "next/dynamic";

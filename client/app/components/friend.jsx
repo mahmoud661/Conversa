@@ -1,5 +1,3 @@
-'use client'
-
 import './friend.css'
 export default function Friend(props){
 

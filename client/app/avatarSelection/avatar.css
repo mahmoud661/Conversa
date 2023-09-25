@@ -1,0 +1,34 @@
+.ava_main_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.ava_main{
+    background-color: #405f64;
+    border-radius:20px ;
+    height: 60vh;
+    width: 80vh;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    justify-content: center;
+    align-items: center;
+}
+.ava_main *{
+    height: fit-content;
+    
+}
+.ava_slider{
+    display: flex;
+        gap: 100%;
+        justify-content: center;
+        align-items: center;
+}
+
+
+
