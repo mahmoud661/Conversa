@@ -1,0 +1,63 @@
+.ava_main_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+
+}
+.ava_main {
+  background: rgb(64, 95, 100);
+  background: radial-gradient(
+    circle,
+    rgba(64, 95, 100, 1) 18%,
+    rgba(4, 13, 18, 1) 100%
+  );
+  border-radius: 20px;
+  height: 60vh;
+  width: 80vh;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  justify-content: center;
+}
+.ava_main * {
+  height: fit-content;
+}
+.select_text {
+  font-size: larger;
+}
+.ava_slider {
+  display: flex;
+  gap: 20%;
+  justify-content: center;
+  align-items: center;
+}
+.select_btn {
+  background: rgba(4, 13, 18, 1);
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.5s;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.select_btn:hover {
+  background: rgb(10, 35, 48);
+  border-radius: 12px;
+}
+.select_btn:active {
+  scale: 0.8;
+}
+.arrow_btn {
+  transition: all 0.5s;
+  font-size: 24px;
+}
+.arrow_btn:hover {
+  scale: 1.4;
+
+}
+.arrow_btn:active {
+  scale: 0.6;
+}
