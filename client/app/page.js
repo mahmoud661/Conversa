@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import man from "./media/1.png";
 import Bur_menu from "./components/menu";
 import Smile from "./media/Smile.png";
@@ -107,13 +105,13 @@ export default function Home() {
               <p>{selected_friend.name}</p>
             </div>
             <div className="menu">
-              <Bur_menu></Bur_menu>
+              <Bur_menu key={0}></Bur_menu>
             </div>
           </div>
 
           <div className="chat_space">
             {chating.map((message, index) => (
-              <p className={message.class}>{message.message}</p>
+              <p key={index} className={message.class}>{message.message}</p>
             ))}
           </div>
           <div className="chat_typing">
