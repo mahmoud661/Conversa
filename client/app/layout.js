@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
       <div className="scrollbar" id="style-1">
       <div className="force-overflow"></div>
       </div>
+<<<<<<< HEAD
       <nav>
           <div>Conversa</div>
             <div>
@@ -28,6 +29,9 @@ export default function RootLayout({ children }) {
             </div>
           <div><div className='avatar'><img height={32} width={32} src={man.src}/></div></div>
       </nav>
+=======
+     
+>>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
       {children}</body>
     </html>
   )
