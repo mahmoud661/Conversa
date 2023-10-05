@@ -36,7 +36,7 @@ export default function sign() {
      }
 
      
-     const data = await response.text();
+     const data = await response.json();
      setresult(data);
 
 

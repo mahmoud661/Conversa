@@ -11,6 +11,9 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 const app = express();
 
+
+
+
 const saltRounds = 10;
 
 app.use(bodyParser.json());
@@ -37,11 +40,6 @@ const userSchema = new mongoose.Schema({
 
 
 const User = new mongoose.model("User", userSchema);
-
-
-
-
-
 
 
 app.get("/api", function (req, res) {
@@ -74,6 +72,7 @@ newuser.save().then(() => {
   console.log("success");
            res.json("approve");
 });
+
  });
   });
 });
