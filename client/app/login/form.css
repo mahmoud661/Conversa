@@ -54,7 +54,6 @@
 
 .forgot {
   display: flex;
-  justify-content: flex-end;
   font-size: 0.75rem;
   line-height: 1rem;
   color: rgba(156, 163, 175, 1);
@@ -106,23 +105,17 @@
 
 .social-message {
   display: flex;
-
   align-items: center;
   padding-top: 1rem;
 }
 
 .social-message-box {
   display: flex;
-
   align-items: center;
   padding-top: 1rem;
 }
 
-.line {
-  height: 1px;
-  flex: 1 1 0%;
-  background-color: aliceblue;
-}
+
 
 .social-message .message {
   padding-left: 0.75rem;
@@ -221,7 +214,6 @@
 }
 
 form * {
-  font-family: "Poppins", sans-serif;
   color: #ffffff;
   letter-spacing: 0.5px;
   outline: none;
@@ -259,7 +251,7 @@ form h3 {
 }
 
 .sign {
-  margin-top: 50px;
+  margin-top: 10px;
   width: 100%;
   background-color: #ffffff;
   color: #080710;
@@ -270,6 +262,12 @@ form h3 {
   cursor: pointer;
 }
 
+.resulte{
+    margin-top: 10px;
+    height: 20px;
+    font-size: medium;
+    color: rgb(255, 118, 118);
+}
 .social {
   margin-top: 30px;
   display: flex;
@@ -299,4 +297,37 @@ form h3 {
 .dd {
   stroke-width: 1.2px;
   stroke: #fff;
+}
+
+.show-password-checkbox {
+  display: flex;
+  font-size: smaller;
+  align-items: center;
+  gap: 10px;
+}
+
+.show-password-checkbox label{
+color: #fff;
+}
+#show_hide_checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+#show_hide_checkbox::before {
+  content: "✔";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+#show_hide_checkbox:checked::before {
+  transform: scale(1);
 }

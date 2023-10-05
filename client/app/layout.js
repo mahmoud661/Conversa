@@ -1,7 +1,10 @@
+'use client'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import man from './media/1.png'
+import { redirect } from "next/navigation";
+import { useEffect } from 'react';
+import { usePathname } from "next/navigation";
+import { useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,29 +13,47 @@ export const metadata = {
   description: 'made by mahmoud',
 }
 
-export default function RootLayout({ children }) {
+export default  function RootLayout({ children }) {
+
+
+    const [canIn,setcanIn] = useState(false)
+    const pathname = usePathname();
+
+// useEffect(()=>{
+//   async function fatchData(){
+
+//      const auth = await fetch("http://localhost:4000/auth", {
+//        cache: "no-cache",
+//      });
+//      const authenticated = await auth.json();
+
+//      if (authenticated.isauth=== "No" ) {
+//        setcanIn(false)
+//        console.log(pathname);
+//      }
+//      else
+//      {setcanIn(true)}
+//   }
+ 
+// fatchData()
+
+
+   
+// })
+  
+// if (!canIn && pathname != "/login" && pathname != "/sign") {
+//   redirect("/login");
+// }
+  
+ 
   return (
     <html lang="en">
       <body className={inter.className}>
-      
-      <div className="scrollbar" id="style-1">
-      <div className="force-overflow"></div>
-      </div>
-<<<<<<< HEAD
-      <nav>
-          <div>Conversa</div>
-            <div>
-                <Link className='Link' href="/">Home</Link>
-                <Link className='Link' href="/posts">posts</Link> 
-                <Link className='Link' href="/login">login</Link>
-                <Link className='Link' href="/sign">Sign up</Link>
-            </div>
-          <div><div className='avatar'><img height={32} width={32} src={man.src}/></div></div>
-      </nav>
-=======
-     
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
-      {children}</body>
+        <div className="scrollbar" id="style-1">
+          <div className="force-overflow"></div>
+        </div>
+        {children}
+      </body>
     </html>
-  )
+  );
 }

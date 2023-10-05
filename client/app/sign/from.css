@@ -51,6 +51,8 @@
     border-color: rgba(236, 236, 236, 0.26);
 }
 
+
+
 .forgot {
     display: flex;
     justify-content: flex-end;
@@ -117,11 +119,6 @@
     padding-top: 1rem;
 }
 
-.line {
-    height: 1px;
-    flex: 1 1 0%;
-    background-color: aliceblue;
-}
 
 .social-message .message {
     padding-left: 0.75rem;
@@ -220,7 +217,6 @@
 }
 
 form * {
-    font-family: "Poppins", sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
     outline: none;
@@ -299,3 +295,34 @@ form h3 {
     stroke-width: 1.2px;
     stroke: #fff;
 }
+
+
+.show-password-checkbox {
+    display: flex;
+    font-size: smaller;
+    align-items: center;
+    gap: 10px;
+}
+
+#show_hide_checkbox {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    #show_hide_checkbox::before {
+        content: "✔";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        transform: scale(0);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    #show_hide_checkbox:checked::before {
+        transform: scale(1);
+    }

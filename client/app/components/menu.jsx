@@ -53,7 +53,7 @@ export default function Home() {
           </Link>
           <Link href="nickName">Add Friend</Link>
           <Link href="nickName">change nickName</Link>
-          <Link href="nickName">Log out</Link>
+          <Link href="login">Log out</Link>
           {/* ... Navigation links ... */}
         </div>
       </div>

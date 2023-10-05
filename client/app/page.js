@@ -1,14 +1,7 @@
 "use client";
-<<<<<<< HEAD
-import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import man from "./media/1.png";
-=======
 import React, { useState, useEffect, useRef } from "react";
 import man from "./media/1.png";
 import Bur_menu from "./components/menu";
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
 import Smile from "./media/Smile.png";
 import Friend from "./components/friend";
 import dynamic from "next/dynamic";
@@ -21,10 +14,6 @@ const EmojiPicker = dynamic(
 );
 
 export default function Home() {
-<<<<<<< HEAD
-
-=======
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
   let friends = ["mahmoud", "ahmad", "abd"];
   const [selected, setSelected] = useState(null);
   const [selected_friend, setSelected_friend] = useState({
@@ -36,26 +25,6 @@ export default function Home() {
 
   const emoji_ref = useRef(null);
 
-<<<<<<< HEAD
-
- const [chating, setchating] = useState([
-   {
-     message: "",
-     class: "",
-   },
- ]);
-
-
-  const addmessage = (message) =>{
-
-setchating((prech) => [...prech, message]);
-settextValue("")
-  }
-
-
-  function emojiBtnHandelr() {
-  setemojiVisibale(!emojiVisibale);
-=======
   const [chating, setchating] = useState([
     {
       message: "",
@@ -72,18 +41,13 @@ settextValue("")
 
   function emojiBtnHandelr() {
     setemojiVisibale(!emojiVisibale);
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
   }
 
   function addemoji(e) {
     const emoji = e.emoji;
     settextValue((prevtextValue) => prevtextValue + e.emoji);
   }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
   function handelTextChange(input) {
     settextValue(input.target.value);
   }
@@ -136,10 +100,6 @@ settextValue("")
 
         <div className="main-divs chat">
           <div className="chat_details">
-<<<<<<< HEAD
-            <img height={48} width={48} src={man.src} />
-            <p>{selected_friend.name}</p>
-=======
             <div className="chat_details">
               <img height={48} width={48} src={man.src} />
               <p>{selected_friend.name}</p>
@@ -147,16 +107,11 @@ settextValue("")
             <div className="menu">
               <Bur_menu key={0}></Bur_menu>
             </div>
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
           </div>
 
           <div className="chat_space">
             {chating.map((message, index) => (
-<<<<<<< HEAD
-              <p className={message.class}>{message.message}</p>
-=======
               <p key={index} className={message.class}>{message.message}</p>
->>>>>>> bdedb2bedf3b0b50f779f8cf7dab3de02e94541e
             ))}
           </div>
           <div className="chat_typing">
