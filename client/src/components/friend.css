@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@300&display=swap');
+
+.friend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #040D12;
+    border-radius: 10px;
+    min-height: 70px;
+    padding: 10px;
+    transition: all 0.5s;
+    color: azure;
+    border: none;
+   font-family: 'Roboto', sans-serif;
+}
+
+.selected_friend {
+    background-color: #091c25;
+}
+.friend:active{
+    background-color: #0f3141dc;
+    scale: 0.9;
+}
+.friend:hover {
+    background-color: #091c25;
+}
+
+.avatar {
+    flex: 1;
+}
+
+.friend p {
+    flex: 4;
+}
