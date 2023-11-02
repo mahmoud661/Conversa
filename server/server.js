@@ -5,10 +5,12 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const io = require("socket.io");
+const http = require("http"); // Import the 'http' module
 
 const app = express();
+const server = http.createServer(app); // Create an HTTP server
 
-const saltRounds = 10;
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -17,13 +19,21 @@ const corsOptions = {
   origin: true,
 };
 
+
+const socketIo = io(server, {
+  pingTimeout: 60000,
+  cors: corsOptions,
+});
+
+const saltRounds = 10;
+
+
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); 
 app.use(express.json());
-
-const url =
-  "mongodb+srv://Dooo:PhuwhUpA1dPg9AVL@cluster0.hha6mae.mongodb.net/ConversaDB";
+ 
+const url = "mongodb://127.0.0.1:27017/ConversaDB";
 mongoose.Promise = global.Promise;
 mongoose.connect(url, { useNewUrlParser: true });
 
@@ -31,11 +41,11 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   chats: Array,
-  nickName: String,
+  nickName: String, 
   friends: Array,
   avatar: {
     type: Number,
-    default: 1,
+    default: 1, 
   },
 });
 
@@ -50,15 +60,63 @@ const chatSchema = new mongoose.Schema({
   ],
 });
 
-function createNewChat(myEmail, friendEmail) {}
 
 const User = new mongoose.model("User", userSchema);
 const Chat = new mongoose.model("Chat", chatSchema);
 
+socketIo.on("connection", (socket) => {
+
+  socket.on("setup", (currentUser) => {
+    socket.join(currentUser);
+    socket.emit("connected");
+  });
+
+  
+  socket.on("join chat",(room)=>{
+    socket.join(room);
+    console.log("user joined room :",room);
+  })
+
+
+  socket.on(
+    "sendMessage",
+    async ({ yourEmail, friendEmail, message, chatId }) => {
+      console.log("message");
+      // Save the message to the database
+      const newMessage = {
+        content: message.content,
+        sender: yourEmail,
+      };
+
+      try {
+        const chat = await Chat.findOne({
+          participants: { $all: [yourEmail, friendEmail] },
+        });
+
+        if (chat) {
+          chat.messages.push(newMessage);
+          const savedChat = await chat.save();
+
+          // Emit the new message to the sender and the friend
+          socket.emit("newMessage", newMessage);
+          socket.to(chatId).emit("newMessage", newMessage);
+        } else {
+          // Handle the case where the chat doesn't exist
+          // You might want to create a new chat here
+        }
+      } catch (err) {
+        console.log(err);
+        // Handle the error
+      }
+    }
+  );
+});
+
+
 app.get("/api", function (req, res) {});
 
 app.post("/sign", function (req, res) {
-  const email = req.body.email;
+  const email = req.body.email; 
   const password = req.body.password;
 
   let user = User.findOne({ email });
@@ -94,6 +152,7 @@ app.post("/login", async function (req, res) {
       } else {
         bcrypt.compare(password, result[0].password).then(function (match) {
           if (match) {
+
             res.json({ msg: "approve", email: email, id: result[0]._id });
           } else res.json({ msg: "wrong password" });
           // result == true
@@ -105,7 +164,7 @@ app.post("/login", async function (req, res) {
       console.log(err);
     });
 });
-
+  
 app.post("/usersData", async function (req, res) {
   const email = req.body.email;
 
@@ -129,23 +188,55 @@ app.post("/usersData", async function (req, res) {
     });
 });
 
-app.get("/chat", function (req, res) {
-  const email = req.body.email;
+app.post("/chat", function (req, res) {
 
-  const query = Chat.find({ email });
-  query
+  const yourEmail = req.body.yourEmail; // Your email
+  const friendEmail = req.body.friendEmail; // Friend's email
+
+  Chat.find({
+    participants: { $all: [yourEmail, friendEmail] },
+  })
     .then((result) => {
-      if (result[0] === undefined) {
-        res.json();
-      } else {
-        res.json(result[0]);
-        // result == true
-      }
+      res.json(result[0]);
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).json({ error: "Error retrieving chats" });
     });
 });
+
+app.post("/sendmessage", async function (req, res) {
+  const yourEmail = req.body.yourEmail;
+  const friendEmail = req.body.friendEmail;
+  const messageContent = req.body.message;
+
+  // Construct the new message object
+  const newMessage = {
+    content: messageContent.content,
+    sender: yourEmail,
+  };
+
+  const chat = await Chat.findOne({
+    participants: { $all: [yourEmail, friendEmail] },
+  });
+
+  if (chat) {
+    chat.messages.push(newMessage);
+    chat
+      .save()
+      .then((savedChat) => {
+        res.json(savedChat); // Return the updated chat with the new message
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: "Error sending message" });
+      });
+  } else {
+    // Handle the case where the chat doesn't exist
+    res.status(404).json({ error: "Chat not found" });
+  }
+});
+
 
 app.post("/nickName", async function (req, res) {
   const email = req.body.email;
@@ -254,6 +345,7 @@ app.post("/addfriend", function (req, res) {
 });
 
 
-app.listen("4000", "0.0.0.0", function () {
-  console.log("server starts...");
+const port = process.env.PORT || 4000;
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on port ${port}`);
 });

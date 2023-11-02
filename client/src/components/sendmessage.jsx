@@ -1,7 +1,7 @@
-export default async function RequstChat(userEmail,friendEmail) {
-  try {
-    
-    const response = await fetch("http://localhost:4000/chat", {
+export default async function Sendmessage(userEmail, friendEmail , message) {
+    console.log(message.content)
+  try { 
+    const response = await fetch("http://localhost:4000/sendmessage", {
       method: "POST",
       cache: "no-cache",
       credentials: "same-origin",
@@ -10,7 +10,8 @@ export default async function RequstChat(userEmail,friendEmail) {
       },
       body: JSON.stringify({
         yourEmail: userEmail,
-        friendEmail:friendEmail,
+        friendEmail: friendEmail, 
+        message:message,
       }),
     });
 
@@ -20,7 +21,6 @@ export default async function RequstChat(userEmail,friendEmail) {
       console.error("Error sending email");
     }
     const data = await response.json();
-    return data;
   } catch (error) {
     console.error("Error:", error);
   }

@@ -35,9 +35,9 @@ export default function AddFriend() {
 
   };
 
-   if (result.msg === "Done") {
-    navigate("/");
-    }
+   if (result.msg === "Friend added and chat created") {
+     navigate("/");
+   }
   return (
     <div>
       <div className="ava_main_main">

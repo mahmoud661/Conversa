@@ -89,13 +89,17 @@ body {
 
     .chat_space{
       flex: 8;
-      max-height:68vh;
-      overflow-y: scroll;
+      max-height:64vh;
+     
       background-color: #0e2525;
-      padding: 20px;
+      
       padding-left: 2px;
-      display: flex;
-      flex-direction: column;
+      
+    }
+    .chat_scroll{
+overflow-y: scroll;
+display: flex;
+  flex-direction: column;
     }
     .user_message{
       padding: 5px;
