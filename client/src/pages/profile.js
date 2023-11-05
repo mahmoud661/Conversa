@@ -1,4 +1,4 @@
-import "../style/nickname.css";
+import "../style/profile.css";
 import "../style/App.css";
 import React from "react";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import AddButton from "../components/Buttons/ADDButton";
 
-export default function NickNameSelect() {
+export default function Profile() {
   const [nickName, setNickName] = useState("");
   const navigate = useNavigate();
 
@@ -34,7 +34,6 @@ export default function NickNameSelect() {
     navigate("/");
   };
 
-
   return (
     <div>
       <div className="ava_main_main">
@@ -60,7 +59,7 @@ export default function NickNameSelect() {
                 },
               }}
               inputProps={{
-                maxLength: 14 ,
+                maxLength: 14,
                 sx: {
                   color: "#fff",
                 },
@@ -80,6 +79,4 @@ export default function NickNameSelect() {
     </div>
   );
 }
-/* <div className="forgot">
-  <a href="/">Forgot Password ?</a>
-</div>; */
+

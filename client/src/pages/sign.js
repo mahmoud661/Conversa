@@ -1,4 +1,4 @@
-import "../login/form.css"
+import "../style/form.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -15,14 +15,14 @@
 }
 
 .selected_friend {
-    background-color: #091c25;
+    background-color: #06101d;
 }
 .friend:active{
-    background-color: #0f3141dc;
+    background-color: #122640;
     scale: 0.9;
 }
 .friend:hover {
-    background-color: #091c25;
+    background-color: #172D40;
 }
 
 .avatar {

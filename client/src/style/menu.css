@@ -60,12 +60,8 @@
   position: fixed; /* Change from "absolute" to "fixed" */
   top: 15%;
   right: 0;
-   background: rgb(64, 95, 100);
-  background: radial-gradient(
-    circle,
-    rgba(64, 95, 100, 1) 18%,
-    rgba(4, 13, 18, 1) 100%
-  );
+   background: #00060D;
+ 
  color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -120,6 +116,10 @@ transform: rotate(345deg);
 @media (max-width: 767px) {
   .a_friend{
   display: block;
+
+}
+.a_friend:hover{
+  cursor: pointer;
 
 }
 }

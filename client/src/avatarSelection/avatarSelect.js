@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import avatar from "../media/avatars"
 import './avatar.css'
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 export default function AvatarSelection (){
   const [selected_avatar,setSelected_avatar] = useState(avatar[0])
@@ -51,6 +51,11 @@ export default function AvatarSelection (){
      };
 return (
   <div>
+    <Link to="/">
+      {" "}
+      {/* Add a Link component */}
+      <button className="back-button">Go Back</button>
+    </Link>
     <div className="ava_main_main">
       <div className="ava_main">
         <p className="select_text">Select your avatar</p>

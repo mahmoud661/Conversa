@@ -86,6 +86,7 @@ socketIo.on("connection", (socket) => {
       const newMessage = {
         content: message.content,
         sender: yourEmail,
+        timestamp:new Date,
       };
 
       try {

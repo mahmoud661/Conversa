@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import './menu.css'
+import "../../style/menu.css";
 
 
-export default function Home() {
+export default function Menu({onClick}) {
    
 
   const [menuVisible, setMenuVisible] = useState(false);
@@ -48,13 +48,13 @@ export default function Home() {
         </button>
         {/* Step 4: Create the navigation menu */}
         <div className={`menu-items ${menuVisible ? "active" : ""}`}>
-          <a href="nickName">profile</a>
-          <a href="nickName" className="a_friend">
-            Friends
-          </a>
+          <a href="/profile">profile</a>
+          <div className="a_friend" onClick={onClick}>
+            <a className="a_friend">Friends</a>
+          </div>
           <a href="/addFriend">Add Friend</a>
           <a href="/nickName">change nickName</a>
-          <a href="avatarSelect">change avatar</a>
+          <a href="/avatarSelect">change avatar</a>
           <a onClick={clearData} href="/login">
             Log out
           </a>

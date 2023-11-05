@@ -1,4 +1,4 @@
-import './friend.css'
+import "../../style/friend.css";
 export default function Friend(props){
 
 return(

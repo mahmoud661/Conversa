@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import avatar from "../media/avatars";
+import avatar from "../../media/avatars";
 import "./nickname.css";
 
 function avatarSelection() {
