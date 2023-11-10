@@ -39,10 +39,10 @@ mongoose.connect(url, { useNewUrlParser: true });
 
 const userSchema = new mongoose.Schema({
   email: String,
-  password: String,
+  password: String,  
   chats: Array,
   nickName: String, 
-  friends: Array,
+  friends: Array, 
   avatar: {
     type: Number,
     default: 1, 
@@ -248,7 +248,10 @@ app.post("/nickName", async function (req, res) {
     { nickName: nickName }
   ).then((result) => {
     res.json("success!");
-  });
+  })
+  .catch((err)=>{
+    console.log(err)
+  })  
 });
 
 app.post("/avatarselect", async function (req, res) {

@@ -321,6 +321,15 @@ background-color: var(--user-message-bg);}
   font-size: medium;
   color: rgb(255, 118, 118);
 }
+.error{
+  position: absolute;
+  margin: 20px;
+  bottom: 20px;
+}
+.error_hide{
+  display: none;
+}
+
  .wellcome_div{
  position: relative;
  }

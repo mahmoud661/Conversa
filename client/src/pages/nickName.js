@@ -5,38 +5,69 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
-import AddButton from "../components/Buttons/ADDButton";
+import SelectButton from "../components/Buttons/selectButton";
+
+import {Alert} from "@mui/material";
 
 export default function NickNameSelect() {
+
+  const [error, setError] = useState(null);
   const [nickName, setNickName] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/nickName", {
-      method: "POST",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem("MyUser")),
-        nickName: nickName,
-      }),
-    });
 
-    if (response.ok) {
-      console.log("Email sent successfully");
+    const trimmedNickName = nickName.trim();
+     if (trimmedNickName === "") {
+      setError("NickName is empty");
+      
+    } else if (trimmedNickName.includes(" ")) {
+      setError("NickName should not contain spaces");
+     
     } else {
-      console.error("Error sending email");
-    }
+     try {
+       const response = await fetch("http://localhost:4000/nickName", {
+         method: "POST",
+         cache: "no-cache",
+         credentials: "same-origin",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           email: JSON.parse(localStorage.getItem("MyUser")).user,
+           nickName: nickName,
+         }),
+       });
 
-    navigate("/");
+       if (response.ok) {
+         console.log("Nickname updated successfully");
+         navigate("/");
+       } else {
+         console.error("Error updating nickname");
+         setError("Failed to add friend");
+       }
+     } catch (error) {
+       console.error("An error occurred during the fetch:", error);
+       setError("An error occurred. Please try again later.");
+     }}
   };
 
 
   return (
     <div>
+      {error ? (
+        <div className="error">
+          <Alert
+            severity="error"
+            onClose={() => {
+              setError(null);
+            }}
+            style={{ backgroundColor: "#10060D", color: "white" }}
+          >
+            {error}
+          </Alert>
+        </div>
+      ) : null}
       <div className="ava_main_main">
         <Link to="/">
           {" "}
@@ -60,7 +91,7 @@ export default function NickNameSelect() {
                 },
               }}
               inputProps={{
-                maxLength: 14 ,
+                maxLength: 14,
                 sx: {
                   color: "#fff",
                 },
@@ -73,7 +104,7 @@ export default function NickNameSelect() {
             />
           </div>
           <div>
-            <AddButton onClick={handleSubmit}></AddButton>
+            <SelectButton onClick={handleSubmit}></SelectButton>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import io from "socket.io-client";
 import SendButton from "../components/Buttons/send button";
 import Wellcome from "../components/wellcome";
 import Loading from "../components/Loding/loding";
+import { Alert } from "@mui/material";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,7 @@ export default function Home() {
     email: String,
     avatar: Number,
   });
+  const [error,setError] = useState(null)
   const [emojiVisibale, setemojiVisibale] = useState(false);
   const [textValue, settextValue] = useState("");
   const [currentUser, setCurrentUser] = useState(
@@ -46,11 +48,14 @@ export default function Home() {
 
       setSocketConnected(true);
     });
-
+    socket.on("connect_error", (err) => {
+      console.error("Socket connection error:", err);
+      setError("Socket connection error");
+    });
     return () => {
       // Disconnect the socket when the component unmounts
       if (socket) {
-        console.log("Disconnected");
+        console.warn("Socket disconnected");
         socket.disconnect();
       }
     };
@@ -143,6 +148,7 @@ export default function Home() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        setError("requst data error")
       });
     const handleOutSideClick = (event) => {
       if (!emoji_ref.current?.contains(event.target)) {
@@ -159,6 +165,20 @@ export default function Home() {
 
   return (
     <div>
+      {error ? (
+        <div className="error">
+          <Alert
+            severity="error"
+            onClose={() => {
+              setError(null);
+            }}
+            style={{ backgroundColor: "#10060D", color: "white" }}
+          >
+            {error}
+          </Alert>
+        </div>
+      ) : null}
+
       <div className="main-structure">
         <div
           className={`main-divs friend_list ${
@@ -200,14 +220,24 @@ export default function Home() {
 
           <div className="friend_list_profile">
             <div className="avatar">
-              <img
-                height={64}
-                width={64}
-                src={avatar[userData.avatar]}
-                alt=""
-              />
+              {userData !== undefined ? (
+                <img
+                  height={64}
+                  width={64}
+                  src={avatar[userData.avatar]}
+                  alt=""
+                />
+              ) : (
+                <p>No avatar available</p>
+              )}
             </div>
-            <p>{userData.nickName}</p>
+            <p>
+              {userData !== undefined ? (
+                userData.nickName
+              ) : (
+                <p>No nickName available</p>
+              )}
+            </p>
           </div>
         </div>
         {selected === null ? (
