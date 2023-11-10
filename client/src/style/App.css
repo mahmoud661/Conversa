@@ -282,6 +282,10 @@ background-color: var(--user-message-bg);}
     flex: 1;
     max-height: 80px;
   }
+  .main-structure .main-divs {
+  border-radius: 10px;
+  min-height: 89vh; 
+}
   .chat {
     height: 100vh; /* Full height for chat on phones */
     width: 100%;
@@ -325,6 +329,7 @@ background-color: var(--user-message-bg);}
   position: absolute;
   margin: 20px;
   bottom: 20px;
+  z-index: 10;
 }
 .error_hide{
   display: none;
