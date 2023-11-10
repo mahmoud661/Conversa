@@ -70,7 +70,7 @@ socketIo.on("connection", (socket) => {
     socket.join(currentUser);
     socket.emit("connected");
   });
-
+  
   
   socket.on("join chat",(room)=>{
     socket.join(room);
@@ -180,6 +180,7 @@ app.post("/usersData", async function (req, res) {
           nickName: result[0].nickName,
           friends: result[0].friends,
           avatar: result[0].avatar,
+          _id:result[0]._id
         });
         // result == true
       }

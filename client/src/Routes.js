@@ -16,18 +16,36 @@ function RoutesComp() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("MyUser") === "undefined") {
-      setLoginUser(null);
+    const storedUser = JSON.parse(localStorage.getItem("MyUser"));
+
+    // Check if there's a stored user and if the date is more than 5 days ago
+    if (storedUser && storedUser.date) {
+      const lastUpdateDate = new Date(storedUser.date);
+      const currentDate = new Date();
+      const differenceInDays =
+        (currentDate - lastUpdateDate) / (1000 * 60 * 60 * 24);
+
+      if (differenceInDays >= 5) {
+        setLoginUser(null);
+        localStorage.setItem("MyUser", null);
+      } else {
+        setLoginUser(storedUser.user);
+      }
     } else {
-      setLoginUser(JSON.parse(localStorage.getItem("MyUser")));
+      setLoginUser(null);
     }
+
     setTimeout(() => {
-      setIsLoading(false); // Set isLoading to false when data is loaded
-    }, 2000); // Adjust the timeout as needed
+      setIsLoading(false);
+    }, 1500);
   }, []);
 
   const updateUser = (user) => {
-    localStorage.setItem("MyUser", JSON.stringify(user));
+    localStorage.setItem(
+      "MyUser",
+      JSON.stringify({ user: user, date: new Date() })
+    );
+
     setLoginUser(user);
   };
 
@@ -36,7 +54,7 @@ function RoutesComp() {
       {isLoading ? (
         <div className="page_loading">
           <Loading />
-        </div> // Show loading screen while data is loading
+        </div> 
       ) : (
         <Routes>
           <Route

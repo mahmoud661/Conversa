@@ -1,80 +1,62 @@
 import "../style/profile.css";
 import "../style/App.css";
-import React from "react";
+import React, { useEffect } from "react";
+import avatar from "../media/avatars";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { TextField } from "@mui/material";
-import AddButton from "../components/Buttons/ADDButton";
+import RequstData from "../components/Data/requestData";
+import Loading from "../components/Loding/loding";
+
+
 
 export default function Profile() {
-  const [nickName, setNickName] = useState("");
-  const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    const response = await fetch("http://localhost:4000/nickName", {
-      method: "POST",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem("MyUser")),
-        nickName: nickName,
-      }),
-    });
+  const [isLoading, setIsLoading] = useState(true);
+  const [User, setUser] = useState(JSON.parse(localStorage.getItem("MyUser")));
+  const [UserData,setUserData] = useState(null)
 
-    if (response.ok) {
-      console.log("Email sent successfully");
-    } else {
-      console.error("Error sending email");
-    }
+useEffect(() => {
+  
+  RequstData(User)
+    .then((result) => {
+      setUserData(result);
+      
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    })
+    .finally(()=>{
+      setIsLoading(false)
+    })
 
-    navigate("/");
-  };
+}, []);
+
+ 
 
   return (
     <div>
-      <div className="ava_main_main">
+      <div className="pro_main_main">
         <Link to="/">
-          {" "}
           {/* Add a Link component */}
           <button className="back-button">Go Back</button>
         </Link>
-        <div className="ava_main">
-          <p className="select_text">Enter your NickName</p>
-          <div>
-            <TextField
-              label="NickName"
-              id="standard-basic"
-              variant="standard"
-              sx={{
-                width: "80%",
-              }}
-              InputLabelProps={{
-                sx: {
-                  color: "#fff",
-                  textTransform: "capitalize",
-                },
-              }}
-              inputProps={{
-                maxLength: 14,
-                sx: {
-                  color: "#fff",
-                },
-              }}
-              // helperText="Please enter a valid input"
-              value={nickName}
-              onChange={(e) => {
-                setNickName(e.target.value);
-              }}
-            />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="pro_main">
+            <div>
+              <img
+                height={64}
+                width={64}
+                src={`${avatar[UserData.avatar]}`}
+                alt=""
+              />
+            </div>
+            <div>nickName: {UserData.nickName}</div>
+            <div>email: {UserData.email}</div>
+            <div>ID: {UserData._id}</div>
           </div>
-          <div>
-            <AddButton onClick={handleSubmit}></AddButton>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

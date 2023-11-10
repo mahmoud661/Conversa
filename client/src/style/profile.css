@@ -1,4 +1,4 @@
-.ava_main_main {
+.pro_main_main {
   
   display: flex;
   justify-content: center;
@@ -12,11 +12,10 @@ button{
   border: none;
   color: #fff;
 }
-.ava_main {
+.pro_main {
   background: #081526;
-  
   border-radius: 20px;
-  height: 90vh;
+  height: 83vh;
   width: 80vh;
   margin: 20px;
   display: flex;
@@ -72,8 +71,8 @@ button{
 }
 .back-button {
   position: absolute;
-  top: 10px; /* Adjust this value for vertical positioning */
-  left: 10px; /* Adjust this value for horizontal positioning */
+  top: 10px; 
+  left: 10px; 
   background-color: #081526;
   color: white;
   border: none;

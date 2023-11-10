@@ -13,7 +13,6 @@ import Wellcome from "../components/wellcome";
 import Loading from "../components/Loding/loding";
 
 export default function Home() {
-
   const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selected_friend, setSelected_friend] = useState({
@@ -23,18 +22,18 @@ export default function Home() {
   });
   const [emojiVisibale, setemojiVisibale] = useState(false);
   const [textValue, settextValue] = useState("");
-const [currentUser, setCurrentUser] = useState(
-  JSON.parse(localStorage.getItem("MyUser"))
-);  const [userData, setUserData] = useState({});
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("MyUser")).user
+  );
+  const [userData, setUserData] = useState({});
   const [friends, setFriends] = useState([]);
   const emoji_ref = useRef(null);
   const [socket, setSocket] = useState(io("http://localhost:4000/"));
   const [socketConnected, setSocketConnected] = useState(false);
   const [chating, setChating] = useState([]);
-  const [chatID,setChatId] = useState('')
+  const [chatID, setChatId] = useState("");
   const [isReversed, setIsReversed] = useState(false);
 
-  
   const reverseStyle = () => {
     setIsReversed(!isReversed);
   };
@@ -48,8 +47,6 @@ const [currentUser, setCurrentUser] = useState(
       setSocketConnected(true);
     });
 
-
-
     return () => {
       // Disconnect the socket when the component unmounts
       if (socket) {
@@ -57,17 +54,15 @@ const [currentUser, setCurrentUser] = useState(
         socket.disconnect();
       }
     };
-  },[currentUser,socket]);
+  }, [currentUser, socket]);
 
-useEffect(()=>{
-  function recivemessage  (message){
+  useEffect(() => {
+    function recivemessage(message) {
       console.log("Received message:", message);
       setChating((prevMessages) => [...prevMessages, message]);
-       
-
     }
-    socket.on("newMessage",recivemessage );
-},[socket])
+    socket.on("newMessage", recivemessage);
+  }, [socket]);
 
   function formatMessageDate(timestamp) {
     const date = new Date(timestamp);
@@ -90,7 +85,7 @@ useEffect(()=>{
           content: textValue,
           sender: currentUser,
         },
-        chatId:chatID
+        chatId: chatID,
       });
 
       settextValue("");
@@ -120,24 +115,21 @@ useEffect(()=>{
     });
   }
   useEffect(() => {
-
     RequstChat(currentUser, selected_friend.email)
       .then((result) => {
-        
-        setIsLoading(true)
+        setIsLoading(true);
         setChating(result.messages);
-        setChatId(result._id)
+        setChatId(result._id);
         socket.emit("join chat", result._id);
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=>{
+      .finally(() => {
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
-        
-      })
+      });
     requstData(currentUser)
       .then((result) => {
         setUserData(result);
@@ -145,7 +137,7 @@ useEffect(()=>{
           .then((data) => {
             setFriends(data);
           })
-          .catch((error) => { 
+          .catch((error) => {
             console.error("Error fetching friend data:", error);
           });
       })
