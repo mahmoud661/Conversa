@@ -124,6 +124,7 @@ export default function Home() {
       .then((result) => {
         setIsLoading(true);
         setChating(result.messages);
+        socket.emit("leave chat", chatID);
         setChatId(result._id);
         socket.emit("join chat", result._id);
       })

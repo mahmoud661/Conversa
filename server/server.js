@@ -71,7 +71,10 @@ socketIo.on("connection", (socket) => {
     socket.emit("connected");
   });
   
-  
+  socket.on("leave chat", (room) => {
+    socket.leave(room);
+    console.log("user leaved room :", room);
+  });
   socket.on("join chat",(room)=>{
     socket.join(room);
     console.log("user joined room :",room);
