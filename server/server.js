@@ -13,7 +13,7 @@ const server = http.createServer(app); // Create an HTTP server
 
 
 const corsOptions = {
-  origin: ("https://depioy-mern-lwhq.vercei.app"),
+  origin: ["https://deploy-mern-lwhq.vercel.app"],
   methods: ["POST", "GET"],
   optionsSuccessStatus: 200,
   credentials: true,
