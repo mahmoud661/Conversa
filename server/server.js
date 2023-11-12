@@ -313,9 +313,8 @@ app.post("/addfriend", function (req, res) {
       res.status(500).json({ msg: "Error finding the friend" });
     });
 });
-app.listen(5000, () => {
-  console.log("Running on port 5000.");
+const port = process.env.PORT || 4000; 
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on port ${port}`);
 });
 
-// Export the Express API
-module.exports = app;
