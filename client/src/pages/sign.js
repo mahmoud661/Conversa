@@ -40,7 +40,7 @@ export default function Sign() {
     } else {
       e.preventDefault();
       try {
-        const response = await fetch("http://localhost:4000/sign", {
+        const response = await fetch("https://conversa-backend-up11.onrender.com/sign", {
           cache: "no-cache",
           method: "POST",
           headers: {
