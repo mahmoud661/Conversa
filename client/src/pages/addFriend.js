@@ -17,7 +17,7 @@ export default function AddFriend() {
  
   const handleSubmit = async () => {
     try{
-    const response = await fetch("http://localhost:4000/addfriend", {
+    const response = await fetch("https://conversa-backend-up11.onrender.com/addfriend", {
       method: "POST",
       cache: "no-cache",
       credentials: "same-origin",
