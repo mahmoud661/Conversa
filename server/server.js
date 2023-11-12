@@ -123,7 +123,7 @@ app.get("/api", function (req, res) {
 });
 
 app.get("/", function (req, res) {
-  res.json({message:"hello"});
+  res.send("hello");
   console.log("hello")
 });
 app.post("/sign", function (req, res) {
