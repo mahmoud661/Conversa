@@ -13,7 +13,8 @@ const server = http.createServer(app); // Create an HTTP server
 
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: ("https://depioy-mern-lwhq.vercei.app"),
+  methods: ["POST", "GET"],
   optionsSuccessStatus: 200,
   credentials: true,
   origin: true,
