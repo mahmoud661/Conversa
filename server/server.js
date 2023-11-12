@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const io = require("socket.io");
 const http = require("http"); // Import the 'http' module
 const app = express();
-const server = http.createServer(app); // Create an HTTP server
+
 const corsOptions = {
   origin: ["https://deploy-mern-lwhq.vercel.app"],
   methods: ["POST", "GET"],
@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
 
 
 const port = process.env.PORT || 4000; 
-server.listen(port, "0.0.0.0", () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server is running on port ${port}`);
 });
 
