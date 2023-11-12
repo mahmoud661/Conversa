@@ -30,7 +30,7 @@ export default function Home() {
   const [userData, setUserData] = useState({});
   const [friends, setFriends] = useState([]);
   const emoji_ref = useRef(null);
-  const [socket, setSocket] = useState(io("http://localhost:4000/"));
+  const [socket, setSocket] = useState(io("https://conversa-backend-up11.onrender.com/"));
   const [socketConnected, setSocketConnected] = useState(false);
   const [chating, setChating] = useState([]);
   const [chatID, setChatId] = useState("");
