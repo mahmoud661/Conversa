@@ -18,7 +18,7 @@ export default function Login({ updateUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/login", {
+      const response = await fetch("https://conversa-backend-up11.onrender.com/login", {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",
