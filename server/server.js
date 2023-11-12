@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(cors(corsOptions)); 
 app.use(express.json());
  
-const url = "mongodb://127.0.0.1:27017/ConversaDB";
+const url = "mongodb+srv://Dooo:PhuwhUpA1dPg9AVL@cluster0.hha6mae.mongodb.net/ConversaDB";
 mongoose.Promise = global.Promise;
 mongoose.connect(url, { useNewUrlParser: true });
 
