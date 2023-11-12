@@ -118,7 +118,9 @@ socketIo.on("connection", (socket) => {
 });
 
 
-app.get("/api", function (req, res) {});
+app.get("/api", function (req, res) {
+  res.json({message:"hello"});
+});
 
 app.post("/sign", function (req, res) {
   const email = req.body.email; 
