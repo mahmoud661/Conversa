@@ -122,6 +122,10 @@ app.get("/api", function (req, res) {
   res.json({message:"hello"});
 });
 
+app.get("/", function (req, res) {
+  res.json({message:"hello"});
+  console.log("hello")
+});
 app.post("/sign", function (req, res) {
   const email = req.body.email; 
   const password = req.body.password;
