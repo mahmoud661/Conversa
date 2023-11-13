@@ -32,7 +32,7 @@ export default function AvatarSelection (){
    
      const handleSubmit = async () => {
       try{
-       const response = await fetch("http://localhost:4000/avatarselect", {
+       const response = await fetch("https://conversa-backend-up11.onrender.com/avatarselect", {
          method: "POST",
          cache: "no-cache",
          credentials: "same-origin",
