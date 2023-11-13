@@ -1,6 +1,6 @@
 export default async function RequstData(searchInput) {
     try {
-      const response = await fetch("http://localhost:4000/usersData", {
+      const response = await fetch("https://conversa-backend-up11.onrender.com/usersData", {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",

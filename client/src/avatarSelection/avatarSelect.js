@@ -32,18 +32,21 @@ export default function AvatarSelection (){
    
      const handleSubmit = async () => {
       try{
-       const response = await fetch("http://localhost:4000/avatarselect", {
-         method: "POST",
-         cache: "no-cache",
-         credentials: "same-origin",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           email: JSON.parse(localStorage.getItem("MyUser")).user,
-           avatar: avatar.indexOf(selected_avatar),
-         }),
-       });
+       const response = await fetch(
+         "https://conversa-backend-up11.onrender.com/avatarselect",
+         {
+           method: "POST",
+           cache: "no-cache",
+           credentials: "same-origin",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify({
+             email: JSON.parse(localStorage.getItem("MyUser")).user,
+             avatar: avatar.indexOf(selected_avatar),
+           }),
+         }
+       );
 
        if (response.ok) {
          console.log("Email sent successfully");

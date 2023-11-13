@@ -6,7 +6,7 @@ function avatarSelection() {
   
   async function selectavatar(email) {
     try {
-      const response = await fetch("http://localhost:4000/chat", {
+      const response = await fetch("https://conversa-backend-up11.onrender.com/chat", {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",

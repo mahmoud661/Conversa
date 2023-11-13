@@ -30,7 +30,9 @@ export default function Home() {
   const [userData, setUserData] = useState({});
   const [friends, setFriends] = useState([]);
   const emoji_ref = useRef(null);
-  const [socket, setSocket] = useState(io("http://localhost:4000/"));
+  const [socket, setSocket] = useState(
+    io("https://conversa-backend-up11.onrender.com/")
+  );
   const [socketConnected, setSocketConnected] = useState(false);
   const [chating, setChating] = useState([]);
   const [chatID, setChatId] = useState("");
@@ -41,6 +43,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+
     // Initialize the socket when the component mounts
     socket.emit("setup", currentUser);
     socket.on("connected", () => {
@@ -162,7 +165,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick);
     };
-  }, [emoji_ref, currentUser, selected_friend, socket, socketConnected]);
+  }, [emoji_ref, currentUser, selected_friend, socket, socketConnected,chatID]);
 
   return (
     <div>

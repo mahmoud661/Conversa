@@ -26,7 +26,7 @@ export default function NickNameSelect() {
      
     } else {
      try {
-       const response = await fetch("http://localhost:4000/nickName", {
+       const response = await fetch("https://conversa-backend-up11.onrender.com/nickName", {
          method: "POST",
          cache: "no-cache",
          credentials: "same-origin",
